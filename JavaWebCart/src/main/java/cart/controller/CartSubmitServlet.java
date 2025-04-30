@@ -28,6 +28,13 @@ public class CartSubmitServlet extends HttpServlet {
 		UserDTO userDTO = (UserDTO)session.getAttribute("userDTO");
 		List<ProductDTO> cart = (List<ProductDTO>)session.getAttribute("cart");
 		
+		// ➤ 空購物車檢查邏輯
+	    if (cart == null || cart.isEmpty()) {
+	        // 避免繼續處理，導回購物車頁面或顯示錯誤訊息
+	        resp.sendRedirect(req.getContextPath() + "/product/cart/view?error=empty");
+	        return;
+	    }
+		
 		// 新增訂單到資料表
 		orderService.addOrder(userDTO.getId(), cart);
 		
