@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class Product {
-	private Integer priceId;
+	private Integer productId;
 	private String productName;
 	private Integer price;
 	private Integer qty;
-	private String imgBase64;
+	private String imageBase64;
 }

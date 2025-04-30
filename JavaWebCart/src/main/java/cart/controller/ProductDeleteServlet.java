@@ -1,9 +1,7 @@
 package cart.controller;
 
 import java.io.IOException;
-import java.util.List;
 
-import cart.model.dto.ProductDTO;
 import cart.service.ProductService;
 import cart.service.impl.ProductServiceImpl;
 import jakarta.servlet.ServletException;
@@ -12,17 +10,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/product/list")
-public class ProductListServlet extends HttpServlet {
+@WebServlet("/product/delete")
+public class ProductDeleteServlet extends HttpServlet{
 	
 	private ProductService productService = new ProductServiceImpl();
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// 取得所有商品
-		List<ProductDTO> productDTOs = productService.findAllProducts();
+		int productId = Integer.parseInt(req.getParameter("productId"));
+		//呼叫service刪除
+		productService.delete(productId);
 		
-		req.setAttribute("productDTOs", productDTOs);
-		req.getRequestDispatcher("/WEB-INF/view/cart/product_list.jsp").forward(req, resp);
+		//重跑商品管理頁面
+		resp.sendRedirect("/JavaWebCart/product/list");
 	}
+
 }

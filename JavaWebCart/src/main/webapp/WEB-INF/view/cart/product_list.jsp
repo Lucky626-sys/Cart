@@ -25,10 +25,12 @@
 				<td valign="top">
 					<fieldset>
 						<legend>商品表單</legend>
-						<form enctype="multipart/form-data" method="post" action="/javaweb/product/add">
+						<%--當需要從表單上傳檔案時一定要用"multipart/form-data"--%>
+						<form enctype="multipart/form-data" method="post" action="/JavaWebCart/product/add">
 							商品名稱：<input type="text" id="productName" name="productName" required="true"><p />
 							商品價格：<input type="number" id="price" name="price" required="true" min="1" max="200"><p />
 							商品庫存：<input type="number" id="qty" name="qty" required="true" min="1" max="999999"><p />
+							<%--這邊有檔案上傳 --%>
 							商品照片：<input type="file" id="productImage" name="productImage" required="true"><p />
 							<img id="preview" alt="照片預覽" style="display: none;" /><p />
 							<button type="submit">新增商品</button>
@@ -38,7 +40,6 @@
 				<td valign="top">
 					<fieldset>
 						<legend>商品列表</legend>
-						<%--這是「列出已經存在的商品」用的表格--%>
 						<table class="pure-table">
 							<thead>
 								<tr>
@@ -49,7 +50,22 @@
 							</thead>
 							<tbody>
 								<!-- 商品列表 -->
-								
+								<c:forEach var="productDTO" items="${ productDTOs }">
+									<tr onmouseover="this.style.backgroundColor='#E0E0ff'" 
+									    onmouseout="this.style.backgroundColor=''">
+										<td align="center">${ productDTO.productId }</td>
+										<td>${ productDTO.productName }</td>
+										<td align="right">${ productDTO.price }</td>
+										<td align="right">${ productDTO.qty }</td>
+										<td align="right">${ productDTO.total }</td>
+										<td>
+											<img width="100" src='data:image/png;base64,${ productDTO.imageBase64 }'>
+										</td>
+										<td>
+											<a href="/JavaWebCart/product/delete?productId=${ productDTO.productId }">刪除</a>
+										</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</fieldset>
