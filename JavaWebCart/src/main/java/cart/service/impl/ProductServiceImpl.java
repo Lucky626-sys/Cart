@@ -1,3 +1,5 @@
+//負責業務邏輯，這裡主要是「將資料庫的 Entity（Product）轉換為 DTO（ProductDTO）」
+//加了 total = price * qty 這種「計算欄位」，算是商業邏輯。
 package cart.service.impl;
 
 import java.util.List;

@@ -1,3 +1,4 @@
+//從資料庫product表格撈資料，轉換為Product物件清單
 package cart.dao.impl;
 
 import java.sql.PreparedStatement;

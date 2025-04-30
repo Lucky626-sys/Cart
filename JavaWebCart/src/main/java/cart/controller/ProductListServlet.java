@@ -1,3 +1,5 @@
+//接收GET請求，透過Service查詢商品清單。
+//使用forward將資料傳給JSP頁面。
 package cart.controller;
 
 import java.io.IOException;
