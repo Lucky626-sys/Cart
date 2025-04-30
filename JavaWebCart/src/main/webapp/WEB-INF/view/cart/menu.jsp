@@ -25,7 +25,19 @@
 	
 	📄<a href="/JavaWebCart/product/list">商品管理</a> | 
 	📝<a href="/JavaWebCart/product/order">商品訂購</a> | 
-	<span class="item-count">${ itemCount }</span> 🛒<a href="/JavaWebCart/product/cart">商品購物車</a> | 
+	<span class="item-count">${ itemCount }
+		<c:choose>
+			<%--empty在EL表達式中的功能:空集合、空字串或空陣列--%>
+			<c:when test="${empty cart }">
+				0
+			</c:when>
+			<c:otherwise>
+				<%--fn:length(...)：JSTL function函數，用來取得字串長度、陣列長度、List大小--%>
+				<%--sessionScope.cart：表示從session中拿出名為cart的變數--%>
+				${fn:length(sessionScope.cart)}
+			</c:otherwise>
+		</c:choose>
+	</span> 🛒<a href="/JavaWebCart/product/cart">商品購物車</a> | 
 	📃<a href="/JavaWebCart/product/order/history">訂單歷史紀錄</a> |
 	📊<a href="/JavaWebCart/product/statistics">商品統計</a> |
 	 
